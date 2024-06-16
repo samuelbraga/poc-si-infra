@@ -30,4 +30,5 @@ module "helm" {
   cluster_ca       = module.eks.cluster_ca
   cluster_endpoint = module.eks.cluster_endpoint
   cluster_name     = module.eks.cluster_name
+  istio_version    = var.istio_version
 }

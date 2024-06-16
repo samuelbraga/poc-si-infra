@@ -12,3 +12,8 @@ variable "cluster_name" {
   default = ""
   type = string
 }
+
+variable "istio_version" {
+  default = ""
+  type = string
+}
