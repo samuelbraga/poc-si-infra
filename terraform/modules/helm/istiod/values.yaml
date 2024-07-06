@@ -1,0 +1,8 @@
+defaults:
+  meshConfig:
+    enablePrometheusMerge: true
+    defaultConfig:
+      tracing:
+        sampling: 100
+        zipkin:
+          address: "jaeger-collector.istio-system.svc.cluster.local:9411"

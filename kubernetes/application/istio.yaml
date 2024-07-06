@@ -89,3 +89,11 @@ spec:
     name: https
     protocol: HTTPS
 # [END servicemesh_release_istio_manifests_microservices_demo]
+---
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: required-mtls-auth
+spec:
+  mtls:
+    mode: PERMISSIVE
