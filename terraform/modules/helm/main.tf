@@ -19,7 +19,7 @@ resource "helm_release" "base" {
   lint             = true
   atomic           = true
   cleanup_on_fail  = true
-  create_namespace = true
+  create_namespace = false
 
   values = [
       file("${path.module}/base/values.yaml")
@@ -27,6 +27,8 @@ resource "helm_release" "base" {
 }
 
 resource "helm_release" "istiod" {
+  depends_on = [helm_release.base]
+
   name             = "istiod"
   repository       = "https://istio-release.storage.googleapis.com/charts"
   chart            = "istiod"
@@ -35,7 +37,7 @@ resource "helm_release" "istiod" {
   lint             = true
   atomic           = true
   cleanup_on_fail  = true
-  create_namespace = true
+  create_namespace = false
 
   values = [
       file("${path.module}/istiod/values.yaml")
@@ -43,16 +45,18 @@ resource "helm_release" "istiod" {
 }
 
 resource "helm_release" "gateway" {
+  depends_on = [helm_release.istiod, helm_release.base]
+
   name             = "gateway"
   repository       = "https://istio-release.storage.googleapis.com/charts"
   chart            = "gateway"
   version          = var.istio_version
-  namespace        = "istio-system"
+  namespace        = "istio-ingress"
   timeout          = 900
   lint             = true
   atomic           = true
   cleanup_on_fail  = true
-  create_namespace = true 
+  create_namespace = false 
 
   values = [
       file("${path.module}/gateway/values.yaml")
