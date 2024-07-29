@@ -148,7 +148,7 @@ spec:
         image: busybox:latest
         env:
         - name: FRONTEND_ADDR
-          value: "a223f4dae2b7949a0b39d9d656192eb8-379641141.sa-east-1.elb.amazonaws.com"
+          value: "frontend:80"
       containers:
       - name: main
         securityContext:
@@ -161,7 +161,7 @@ spec:
         image: gcr.io/google-samples/microservices-demo/loadgenerator:v0.10.0
         env:
         - name: FRONTEND_ADDR
-          value: "a223f4dae2b7949a0b39d9d656192eb8-379641141.sa-east-1.elb.amazonaws.com"
+          value: "frontend:80"
         - name: USERS
           value: "1000"
         resources:
